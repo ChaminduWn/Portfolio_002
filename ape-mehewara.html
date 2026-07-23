@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ape Mehewara - Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #ffffff;
@@ -143,8 +143,8 @@
 
     /* Next-generation project story */
     :root { --accent: #6d8cff; --accent-2: #25d0ae; }
-    body { font-family: 'Manrope', sans-serif; background: #f4f7fb; }
-    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'DM Sans', sans-serif; background: #f4f7fb; }
+    h1, h2, h3 { font-family: 'Sora', sans-serif; }
     .nav-bar { position: fixed; padding: 20px clamp(20px, 4vw, 64px); }
     .back-btn {
       color: #fff; background: rgba(10, 18, 38, .62);
@@ -175,7 +175,8 @@
     .phase-card::before { width: 100%; height: 4px; background: linear-gradient(90deg, var(--blue), var(--accent-2)); }
     .phase-card:hover { transform: translateY(-5px); box-shadow: 0 24px 65px rgba(21,32,55,.11); }
     .phase-card h2 { font-size: 22px; letter-spacing: -.03em; }
-    .phase-card p { text-align: left; line-height: 1.8; }
+    .phase-card p { text-align: justify; text-justify: inter-word; hyphens: auto; line-height: 1.8; letter-spacing: -.005em; }
+    .hero p.lead { text-align: justify; text-justify: inter-word; hyphens: auto; }
     .conclusion-box { grid-column: 1 / -1; margin-top: 12px; background: linear-gradient(135deg, #0c1425, #173d59); }
     @media (max-width: 760px) {
       .hero { min-height: auto; }

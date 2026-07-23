@@ -14,10 +14,16 @@
     buildTrack('track2', skillRows[1]);
     buildTrack('track3', skillRows[2]);
 
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links')?.classList.remove('open');
+      });
+    });
+
     // ---- Projects data ----
     const projects = [
       { n: "01", name: "PowerLink", sub: "AI-Driven Smart Electricity Monitoring", desc: "AI-powered electricity monitoring platform with IoT appliance monitoring, bill prediction, and energy-saving recommendations.", tags: ["Python", "React Native", "MQTT", "ESP32"], img: "codeEditor.png", ghLink: "" },
-      { n: "02", name: "TechnoHub.lk", sub: "Learning Management System", desc: "Built a full-stack e-learning platform featuring courses, quizzes, e-books, secure payments, and role-based dashboards for learners, instructors, and administrators.", tags: ["Next.js", "React", "Node.js", "Express.js", "Prisma ORM", "MySQL", "Tailwind CSS"], img: "", ghLink: "" },
+      { n: "02", name: "TechnoHub.lk", sub: "Learning Management System", desc: "Built a full-stack e-learning platform featuring courses, quizzes, e-books, secure payments, and role-based dashboards for learners, instructors, and administrators.", tags: ["Next.js", "React", "Node.js", "Express.js", "Prisma ORM", "MySQL", "Tailwind CSS"], img: "technohub-dashboard.png", ghLink: "" },
       { n: "03", name: "Aura", sub: "Greenhouse AI Monitoring System", desc: "Developed an intelligent IoT-based greenhouse monitoring system that collects real-time environmental data using sensors and analyzes it using Google Gemini AI.", tags: ["ESP32", "Gemini AI", "MQTT", "TFT Display"], img: "aura.png", ghLink: "https://github.com/ChaminduWn/Aura" },
       { n: "04", name: "LibraCore", sub: "Library Management System", desc: "Developed a comprehensive library management platform supporting book inventory management, lending and borrowing operations, user management, and rental management.", tags: ["Spring Boot", "Next.js", "MySQL", "Tailwind CSS"], img: "libracore.png", ghFrontend: "https://github.com/ChaminduWn/library_management_system_frontend", ghBackend: "https://github.com/ChaminduWn/library_management_system_backend" },
       { n: "05", name: "CJ Gym & Fitness", sub: "Gym Management System", desc: "MERN stack application that streamlines gym operations by managing members, schedules, staff, subscriptions, finances, inventory, and supplements, with coaching support.", tags: ["MERN", "Tailwind CSS", "Redux", "Firebase", "Material UI"], img: "gym.png", ghLink: "https://github.com/inupaUdara/gym-management-system" },
