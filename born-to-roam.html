@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Born To Roam - Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f7f9fc;
+      --text: #0b0e14;
+      --text-soft: #545b68;
+      --border: #e6e9ef;
+      --blue: #2457ec;
+      --blue-soft: #eaf0ff;
+      --teal: #0fae8b;
+      --teal-soft: #e6f7f2;
+      --blue-deep: #163b9e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .nav-bar {
+      padding: 24px 32px;
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      z-index: 10;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 600; font-size: 14px; color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(20,30,60,0.08); color: var(--blue); border-color: var(--blue);}
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #f0fdfa 0%, #eef2ff 100%);
+      padding: 140px 32px 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(15,174,139,0.06) 0%, rgba(15,174,139,0) 70%);
+      top: -200px; right: -200px; z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 840px;
+      margin-bottom: 50px;
+    }
+    .hero-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--teal); font-weight: 600;
+      background: var(--teal-soft); padding: 6px 14px; border-radius: 100px;
+      display: inline-block; margin-bottom: 24px; border: 1px solid #bcece0;
+    }
+    .hero h1 { font-size: clamp(36px, 5vw, 54px); line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
+    .hero p.lead { font-size: 17px; color: var(--text-soft); }
+
+    .hero-gallery {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1100px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .hero-gallery img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(20,30,60,0.08);
+      border: 4px solid #fff;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .hero-gallery img:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(15,174,139,0.15);
+      z-index: 3;
+      border-color: var(--teal-soft);
+    }
+    
+    .content-wrap {
+      max-width: 760px; margin: 80px auto; padding: 0 32px;
+    }
+    .phase-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(20, 30, 60, 0.03);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .phase-card:hover {
+      box-shadow: 0 20px 50px rgba(20, 30, 60, 0.08);
+    }
+    .phase-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--blue);
+    }
+    .phase-card h2 { font-size: 24px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;}
+    .phase-card .subtitle { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--teal); margin-bottom: 24px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; background: var(--teal-soft); padding: 4px 12px; border-radius: 100px; }
+    .phase-card p { text-align: justify; font-size: 16px; color: var(--text-soft); }
+    
+    .conclusion-box {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--blue-deep) 100%);
+      border-radius: 24px; padding: 48px; text-align: center; margin-top: 60px;
+      box-shadow: 0 24px 48px rgba(15, 174, 139, 0.2);
+    }
+    .conclusion-box p { font-size: 20px; font-style: italic; font-weight: 500; color: rgba(255,255,255,0.95); text-align: center; margin-bottom: 12px; line-height: 1.5; font-family: 'Space Grotesk'; }
+    
+    @media (max-width: 860px) {
+      .hero-gallery { grid-template-columns: 1fr; }
+      .hero-gallery img { height: auto; aspect-ratio: 16/9; }
+      .phase-card { padding: 32px; }
+    }
+
+    /* Next-generation project story */
+    :root { --accent: #28d7b0; --accent-2: #68a7ff; }
+    body { font-family: 'Manrope', sans-serif; background: #f4f7fb; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .nav-bar { position: fixed; padding: 20px clamp(20px, 4vw, 64px); }
+    .back-btn { color: #fff; background: rgba(7,25,30,.62); border-color: rgba(255,255,255,.15); box-shadow: 0 12px 36px rgba(0,0,0,.2); }
+    .back-btn:hover { color: #fff; background: rgba(15,174,139,.9); border-color: transparent; }
+    .hero {
+      min-height: 92vh; padding: 150px clamp(20px, 4vw, 64px) 72px;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(40,215,176,.27), transparent 30rem),
+        radial-gradient(circle at 88% 20%, rgba(104,167,255,.2), transparent 28rem),
+        linear-gradient(145deg, #071216 0%, #0d2c30 56%, #10223f 100%);
+    }
+    .hero::before { inset: 0; width: auto; height: auto; border-radius: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 52px 52px; }
+    .hero-content { max-width: 900px; margin-bottom: 58px; }
+    .hero-meta { color: #93f0dc; background: rgba(40,215,176,.1); border-color: rgba(147,240,220,.22); }
+    .hero h1 { color: #fff; font-weight: 800; letter-spacing: -.055em; font-size: clamp(44px, 7vw, 78px); }
+    .hero p.lead { color: #c5d7d8; font-size: clamp(16px, 2vw, 19px); line-height: 1.8; max-width: 800px; margin: auto; }
+    .hero-gallery { max-width: 1180px; grid-template-columns: 1.3fr .85fr; grid-template-rows: 190px 190px; }
+    .hero-gallery img { height: 100%; border-radius: 22px; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 30px 70px rgba(0,0,0,.3); }
+    .hero-gallery img:first-child { grid-row: 1 / 3; }
+    .content-wrap { max-width: 1120px; margin: 0 auto; padding: 96px 32px 110px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+    .phase-card { margin: 0; padding: 32px; border-radius: 24px; box-shadow: 0 16px 50px rgba(21,32,55,.06); }
+    .phase-card::before { width: 100%; height: 4px; background: linear-gradient(90deg, var(--blue), var(--accent)); }
+    .phase-card:hover { transform: translateY(-5px); box-shadow: 0 24px 65px rgba(21,32,55,.11); }
+    .phase-card h2 { font-size: 20px; letter-spacing: -.03em; }
+    .phase-card p { text-align: left; line-height: 1.8; }
+    .conclusion-box { grid-column: 1 / -1; margin-top: 14px; background: linear-gradient(135deg, #0a2829, #173a60); }
+    @media (max-width: 900px) { .content-wrap { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) {
+      .hero { min-height: auto; }
+      .hero-gallery { display: grid; grid-template-columns: 1fr; grid-template-rows: none; }
+      .hero-gallery img, .hero-gallery img:first-child { grid-row: auto; height: auto; aspect-ratio: 16/10; }
+      .content-wrap { padding: 64px 20px 80px; }
+      .phase-card, .conclusion-box { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="nav-bar">
+    <a href="index.html#about" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-meta">2024 – 2025 · Leo Club of SLIIT</div>
+      <h1>👣 Born To Roam ... 🤍💫</h1>
+      <p class="lead">A name that echoes our mission: to protect wildlife and life below water. As part of the Leoistic year 2024/25, I had the immense honor of chairing this project with great passion. It wasn't a solo journey — it was a collaboration filled with dedication, unity, and unwavering support from my fellow Leo members & My Team 💪.</p>
+    </div>
+
+    <!-- Photos placed beautifully at the top -->
+    <div class="hero-gallery">
+      <img src="assets/Born%20to%20Roam%202024.25/Born%20to%20Roam%20(1).jpg" alt="Born to Roam Action 1">
+      <img src="assets/Born%20to%20Roam%202024.25/Born%20to%20Roam%20(2).jpg" alt="Born to Roam Action 2">
+      <img src="assets/Born%20to%20Roam%202024.25/Born%20to%20Roam%20(3).jpg" alt="Born to Roam Action 3">
+    </div>
+  </section>
+
+  <div class="content-wrap">
+    <div class="phase-card">
+      <h2>🐢 Phase 01: Turtle Conservation</h2>
+      <div class="subtitle">📍 Hikkaduwa Turtle center &amp; Coastal Area (2024.11.24)</div>
+      <p>We began with a turtle conservation project in Hikkaduwa, feeding and cleaning tanks to improve their habitat. We also created a vibrant mural to share the story of turtle conservation — turning art into advocacy. 🎨🌊</p>
+    </div>
+
+    <div class="phase-card" style="--blue: #f0a63a;">
+      <h2>🐝 Phase 02: Bee Conservation</h2>
+      <div class="subtitle" style="color: #8a6d00; background: #fffbe6;">📍 Mirigama (2025.02.19)</div>
+      <p>To tackle the decline of honey bees, we hosted a bookmark fundraiser that raised Rs. 40,000+, enabling us to donate 10 bee boxes to elderly individuals. This supported pollinators and empowered communities through sustainable honey production. 🌼🍯</p>
+    </div>
+
+    <div class="phase-card" style="--blue: var(--teal);">
+      <h2>🌊 Phase 03: Coral Replantation</h2>
+      <div class="subtitle">📍 Tangalle (2025.05.03)</div>
+      <p>Partnering with marine biologist Mr. Chathushka Nadeniya, we led a coral replantation initiative. Cement blocks embedded with coral fragments were placed underwater to revive reefs, enhance biodiversity, and protect our coasts. 🪸🐠</p>
+    </div>
+
+    <div class="conclusion-box">
+      <p>💫 "Born To Roam was more than a project — it was a movement driven by teamwork, perseverance, and love for nature. I'm grateful to every member who helped bring this vision to life."</p>
+      <p style="font-size: 16px; opacity: 0.8;">Let's keep roaming, learning, and protecting — for a better tomorrow.🌿🌎</p>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ape Mehewara - Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f7f9fc;
+      --text: #0b0e14;
+      --text-soft: #545b68;
+      --border: #e6e9ef;
+      --blue: #2457ec;
+      --blue-soft: #eaf0ff;
+      --teal: #0fae8b;
+      --blue-deep: #163b9e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .nav-bar {
+      padding: 24px 32px;
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      z-index: 10;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 600; font-size: 14px; color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(20,30,60,0.08); color: var(--blue); border-color: var(--blue);}
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-alt) 0%, #eef2ff 100%);
+      padding: 140px 32px 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(36,87,236,0.06) 0%, rgba(36,87,236,0) 70%);
+      top: -200px; right: -200px; z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 840px;
+      margin-bottom: 50px;
+    }
+    .hero-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--blue); font-weight: 600;
+      background: var(--blue-soft); padding: 6px 14px; border-radius: 100px;
+      display: inline-block; margin-bottom: 24px; border: 1px solid #d7e2ff;
+    }
+    .hero h1 { font-size: clamp(36px, 5vw, 54px); line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
+    .hero p.lead { font-size: 17px; color: var(--text-soft); }
+
+    .hero-gallery {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1100px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .hero-gallery img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(20,30,60,0.08);
+      border: 4px solid #fff;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .hero-gallery img:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(36,87,236,0.15);
+      z-index: 3;
+      border-color: var(--blue-soft);
+    }
+    
+    .content-wrap {
+      max-width: 760px; margin: 80px auto; padding: 0 32px;
+    }
+    .phase-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(20, 30, 60, 0.03);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .phase-card:hover {
+      box-shadow: 0 20px 50px rgba(20, 30, 60, 0.08);
+    }
+    .phase-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--blue);
+    }
+    .phase-card h2 { font-size: 24px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;}
+    .phase-card .subtitle { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--teal); margin-bottom: 24px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; background: var(--teal-soft); padding: 4px 12px; border-radius: 100px; }
+    .phase-card p { text-align: justify; font-size: 16px; color: var(--text-soft); }
+    
+    .conclusion-box {
+      background: linear-gradient(135deg, var(--text) 0%, var(--blue-deep) 100%);
+      border-radius: 24px; padding: 48px; text-align: center; margin-top: 60px;
+      box-shadow: 0 24px 48px rgba(22, 59, 158, 0.2);
+    }
+    .conclusion-box p { font-size: 20px; font-style: italic; font-weight: 500; color: rgba(255,255,255,0.95); text-align: center; margin: 0; line-height: 1.5; font-family: 'Space Grotesk'; }
+    
+    @media (max-width: 860px) {
+      .hero-gallery { grid-template-columns: 1fr; }
+      .hero-gallery img { height: auto; aspect-ratio: 16/9; }
+      .phase-card { padding: 32px; }
+    }
+
+    /* Next-generation project story */
+    :root { --accent: #6d8cff; --accent-2: #25d0ae; }
+    body { font-family: 'Manrope', sans-serif; background: #f4f7fb; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .nav-bar { position: fixed; padding: 20px clamp(20px, 4vw, 64px); }
+    .back-btn {
+      color: #fff; background: rgba(10, 18, 38, .62);
+      border-color: rgba(255,255,255,.15); box-shadow: 0 12px 36px rgba(0,0,0,.2);
+    }
+    .back-btn:hover { color: #fff; background: rgba(36,87,236,.9); border-color: transparent; }
+    .hero {
+      min-height: 92vh; padding: 150px clamp(20px, 4vw, 64px) 72px;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(109,140,255,.3), transparent 30rem),
+        radial-gradient(circle at 88% 20%, rgba(37,208,174,.18), transparent 28rem),
+        linear-gradient(145deg, #080d19 0%, #111d38 58%, #0a2530 100%);
+    }
+    .hero::before {
+      inset: 0; width: auto; height: auto; border-radius: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+    .hero-content { max-width: 900px; margin-bottom: 58px; }
+    .hero-meta { color: #b9c8ff; background: rgba(109,140,255,.12); border-color: rgba(185,200,255,.22); }
+    .hero h1 { color: #fff; font-weight: 800; letter-spacing: -.055em; font-size: clamp(44px, 7vw, 78px); }
+    .hero p.lead { color: #c5cfdd; font-size: clamp(16px, 2vw, 19px); line-height: 1.8; max-width: 800px; margin: auto; }
+    .hero-gallery { max-width: 1180px; grid-template-columns: 1.3fr .85fr; grid-template-rows: 190px 190px; }
+    .hero-gallery img { height: 100%; border-radius: 22px; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 30px 70px rgba(0,0,0,.3); }
+    .hero-gallery img:first-child { grid-row: 1 / 3; }
+    .content-wrap { max-width: 1120px; margin: 0 auto; padding: 96px 32px 110px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; }
+    .phase-card { margin: 0; padding: 38px; border-radius: 24px; box-shadow: 0 16px 50px rgba(21,32,55,.06); }
+    .phase-card::before { width: 100%; height: 4px; background: linear-gradient(90deg, var(--blue), var(--accent-2)); }
+    .phase-card:hover { transform: translateY(-5px); box-shadow: 0 24px 65px rgba(21,32,55,.11); }
+    .phase-card h2 { font-size: 22px; letter-spacing: -.03em; }
+    .phase-card p { text-align: left; line-height: 1.8; }
+    .conclusion-box { grid-column: 1 / -1; margin-top: 12px; background: linear-gradient(135deg, #0c1425, #173d59); }
+    @media (max-width: 760px) {
+      .hero { min-height: auto; }
+      .hero-gallery { display: grid; grid-template-columns: 1fr; grid-template-rows: none; }
+      .hero-gallery img, .hero-gallery img:first-child { grid-row: auto; height: auto; aspect-ratio: 16/10; }
+      .content-wrap { grid-template-columns: 1fr; padding: 64px 20px 80px; }
+      .phase-card, .conclusion-box { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="nav-bar">
+    <a href="index.html#about" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-meta">2025 – 2026 · Leo Club of SLIIT</div>
+      <h1>❤️🔥 Ape Mehewara</h1>
+      <p class="lead">A project that reflects our commitment to empowering education and uplifting communities. As part of the Leoistic Year 2025/26, I had the privilege of initiating and chairing this project alongside an incredible team whose dedication transformed ideas into meaningful impact. 💪✨</p>
+    </div>
+
+    <!-- Photos placed beautifully at the top -->
+    <div class="hero-gallery">
+      <img src="assets/Ape%20Mehewara%202025.26/ape%20mehewara%20(1).png" alt="Ape Mehewara Action 1">
+      <img src="assets/Ape%20Mehewara%202025.26/ape%20mehewara%20(4).png" alt="Ape Mehewara Action 2">
+      <img src="assets/Ape%20Mehewara%202025.26/ape%20mehewara%20(5).png" alt="Ape Mehewara Action 3">
+    </div>
+  </section>
+
+  <div class="content-wrap">
+    <div class="phase-card">
+      <h2>📚 Phase 01: Dhamma School Renovation</h2>
+      <div class="subtitle">📍 Kandē Purāna Maha Vihāraya</div>
+      <p>Our first phase focused on cleaning and renovating the Dhamma School premises at Kandē Purāna Maha Vihāraya, creating a safer, cleaner, and more comfortable learning environment for students. The project involved restoring classroom furniture, improving the surrounding facilities, and encouraging community participation in supporting educational and religious institutions. Through these efforts, we were able to enhance the learning experience of more than 1,200 students. 🙏📖</p>
+    </div>
+
+    <div class="phase-card" style="--blue: var(--teal);">
+      <h2>➗ Phase 02: Mathematics Laboratory</h2>
+      <div class="subtitle">📍 Royal College, Horana</div>
+      <p>The second phase focused on transforming an underutilized classroom at Royal College, Horana into a fully functional Mathematics Laboratory. By improving infrastructure and providing essential educational resources, we created an engaging space that encourages practical learning and academic growth. The project not only benefited students but also supported teachers in delivering a more interactive learning experience while promoting sustainable educational development. 🎓📐</p>
+    </div>
+
+    <div class="conclusion-box">
+      <p>🌟 "Ape Mehewara was more than a project, it was a commitment to creating opportunities, strengthening educational foundations, and serving communities with purpose. ❤️"</p>
+    </div>
+  </div>
+
+</body>
+</html>

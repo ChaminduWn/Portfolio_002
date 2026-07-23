@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSands - Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f7f9fc;
+      --text: #0b0e14;
+      --text-soft: #545b68;
+      --border: #e6e9ef;
+      --blue: #2457ec;
+      --blue-soft: #eaf0ff;
+      --teal: #0fae8b;
+      --teal-soft: #e6f7f2;
+      --green: #22c55e;
+      --green-soft: #dcfce7;
+      --blue-deep: #163b9e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .nav-bar {
+      padding: 24px 32px;
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      z-index: 10;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 600; font-size: 14px; color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(20,30,60,0.08); color: var(--green); border-color: var(--green);}
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #f0fdf4 0%, #eef2ff 100%);
+      padding: 140px 32px 80px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,197,94,0.06) 0%, rgba(34,197,94,0) 70%);
+      top: -200px; right: -200px; z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 840px;
+      margin-bottom: 50px;
+    }
+    .hero-meta {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--green); font-weight: 600;
+      background: var(--green-soft); padding: 6px 14px; border-radius: 100px;
+      display: inline-block; margin-bottom: 24px; border: 1px solid #bbf7d0;
+    }
+    .hero h1 { font-size: clamp(36px, 5vw, 54px); line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
+    .hero p.lead { font-size: 17px; color: var(--text-soft); }
+
+    .hero-gallery {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 900px;
+      display: flex; justify-content: center;
+    }
+    .hero-gallery img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(20,30,60,0.1);
+      border: 4px solid #fff;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+    .hero-gallery img:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 30px 60px rgba(34,197,94,0.15);
+      border-color: var(--green-soft);
+    }
+    
+    .content-wrap {
+      max-width: 760px; margin: 80px auto; padding: 0 32px;
+    }
+    .phase-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 44px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(20, 30, 60, 0.03);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .phase-card:hover {
+      box-shadow: 0 20px 50px rgba(20, 30, 60, 0.08);
+    }
+    .phase-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--blue);
+    }
+    .phase-card h2 { font-size: 24px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;}
+    .phase-card .subtitle { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--green); margin-bottom: 24px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; background: var(--green-soft); padding: 4px 12px; border-radius: 100px; }
+    .phase-card p { text-align: justify; font-size: 16px; color: var(--text-soft); }
+    
+    .conclusion-box {
+      background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%);
+      border-radius: 24px; padding: 48px; text-align: center; margin-top: 60px;
+      box-shadow: 0 24px 48px rgba(34, 197, 94, 0.2);
+    }
+    .conclusion-box p { font-size: 20px; font-style: italic; font-weight: 500; color: rgba(255,255,255,0.95); text-align: center; margin-bottom: 20px; line-height: 1.5; font-family: 'Space Grotesk'; }
+    .conclusion-box p:last-child { margin-bottom: 0; font-size: 16px; opacity: 0.9;}
+
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; justify-content: center; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #fff; border: 1px solid var(--border); color: var(--text-soft); padding: 6px 14px; border-radius: 100px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
+
+    @media (max-width: 860px) {
+      .hero-gallery img { max-height: 300px; }
+      .phase-card { padding: 32px; }
+    }
+
+    /* Next-generation project story */
+    :root { --accent: #5de283; --accent-2: #1bc7b0; }
+    body { font-family: 'Manrope', sans-serif; background: #f3f8f5; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .nav-bar { position: fixed; padding: 20px clamp(20px, 4vw, 64px); }
+    .back-btn { color: #fff; background: rgba(8,27,20,.62); border-color: rgba(255,255,255,.15); box-shadow: 0 12px 36px rgba(0,0,0,.2); }
+    .back-btn:hover { color: #fff; background: rgba(34,197,94,.88); border-color: transparent; }
+    .hero {
+      min-height: 92vh; padding: 150px clamp(20px, 4vw, 64px) 72px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(93,226,131,.25), transparent 30rem),
+        radial-gradient(circle at 88% 20%, rgba(27,199,176,.18), transparent 28rem),
+        linear-gradient(145deg, #07140d 0%, #102e20 57%, #0b3437 100%);
+    }
+    .hero::before { inset: 0; width: auto; height: auto; border-radius: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 52px 52px; }
+    .hero-content { max-width: 900px; margin-bottom: 58px; }
+    .hero-meta { color: #a8f5bc; background: rgba(93,226,131,.1); border-color: rgba(168,245,188,.22); }
+    .hero h1 { color: #fff; font-weight: 800; letter-spacing: -.055em; font-size: clamp(44px, 7vw, 78px); }
+    .hero p.lead { color: #c7d9ce; font-size: clamp(16px, 2vw, 19px); line-height: 1.8; max-width: 800px; margin: auto; }
+    .hero-gallery { max-width: 1120px; }
+    .hero-gallery img { max-height: 560px; border-radius: 28px; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 34px 80px rgba(0,0,0,.32); }
+    .content-wrap { max-width: 1120px; margin: 0 auto; padding: 96px 32px 110px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 24px; }
+    .phase-card { margin: 0; padding: 32px; border-radius: 24px; box-shadow: 0 16px 50px rgba(21,55,35,.06); }
+    .phase-card::before { width: 100%; height: 4px; background: linear-gradient(90deg, var(--blue), var(--accent-2)); }
+    .phase-card:hover { transform: translateY(-5px); box-shadow: 0 24px 65px rgba(21,55,35,.11); }
+    .phase-card h2 { font-size: 20px; letter-spacing: -.03em; }
+    .phase-card p { text-align: left; line-height: 1.8; }
+    .conclusion-box, .tags { grid-column: 1 / -1; }
+    .conclusion-box { margin-top: 14px; background: linear-gradient(135deg, #153b24, #096157); }
+    .tag { background: rgba(255,255,255,.8); backdrop-filter: blur(8px); }
+    @media (max-width: 900px) { .content-wrap { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) {
+      .hero { min-height: auto; }
+      .content-wrap { padding: 64px 20px 80px; }
+      .phase-card, .conclusion-box { padding: 28px; }
+      .hero-gallery img { min-height: 280px; max-height: 380px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="nav-bar">
+    <a href="index.html#about" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-meta">2023 – 2024 · Leo Club of SLIIT</div>
+      <h1>🌱 EcoSands</h1>
+      <p class="lead">Environmental conservation is not achieved through a single event—it is built through continuous action and long-term commitment. That vision inspired <strong>EcoSands</strong>, a three-phase environmental initiative dedicated to protecting Sri Lanka's coastal and freshwater ecosystems.</p>
+    </div>
+
+    <!-- Beautiful large hero image -->
+    <div class="hero-gallery">
+      <img src="assets/Ecosands%202023.24/Ecosands.jpg" alt="EcoSands Action">
+    </div>
+  </section>
+
+  <div class="content-wrap">
+    <div class="phase-card" style="--blue: #3b82f6;">
+      <h2>🌊 Phase 1: Beach Cleanup &amp; Coconut Plantation</h2>
+      <div class="subtitle" style="color: #2563eb; background: #dbeafe;">📍 Dehiwala Beach</div>
+      <p>We began by cleaning the shoreline of Dehiwala Beach, removing waste to create a cleaner environment for both the community and marine life. To contribute to long-term coastal protection, we also planted coconut trees that will help strengthen the shoreline while enhancing the natural landscape.</p>
+    </div>
+
+    <div class="phase-card" style="--blue: var(--green);">
+      <h2>🌳 Phase 2: Kumbuk Plantation</h2>
+      <div class="subtitle">📍 Around Thalangama Lake</div>
+      <p>Our journey continued with the planting of <strong>50 Kumbuk (Terminalia arjuna) trees</strong> around Thalangama Lake. These native trees play a vital role in preserving biodiversity, reducing soil erosion, and protecting valuable wetland ecosystems for future generations.</p>
+    </div>
+
+    <div class="phase-card" style="--blue: var(--teal);">
+      <h2>🌿 Phase 3: Kadolana Mangrove Plantation</h2>
+      <div class="subtitle" style="color: var(--teal); background: var(--teal-soft);">📍 Kalido Beach</div>
+      <p>In the final phase, we planted <strong>100+ Kadolana mangrove plants</strong> at Kalido Beach. Mangroves are among the world's most effective natural coastal defenses, providing habitats for wildlife, preventing coastal erosion, improving water quality, and helping combat climate change by storing significant amounts of carbon.</p>
+    </div>
+
+    <div class="conclusion-box">
+      <p>Every tree planted and every piece of waste collected represents a step toward a greener, cleaner, and more sustainable Sri Lanka. Together, we demonstrated that collective action can create lasting environmental change.</p>
+      <p>A heartfelt thank you to every volunteer, partner, and supporter who dedicated their time and effort to making EcoSands a success. Your commitment proves that meaningful change begins with people who choose to act. <br><br>Let's continue protecting our environment—for our communities, our wildlife, and future generations. 💚🌍</p>
+    </div>
+
+    <div class="tags">
+      <span class="tag">#EcoSands</span>
+      <span class="tag">#EnvironmentalConservation</span>
+      <span class="tag">#BeachCleanup</span>
+      <span class="tag">#MangroveRestoration</span>
+      <span class="tag">#Kumbuk</span>
+      <span class="tag">#TreePlantation</span>
+      <span class="tag">#Sustainability</span>
+      <span class="tag">#ClimateAction</span>
+      <span class="tag">#ProtectOurPlanet</span>
+      <span class="tag">#SriLanka</span>
+      <span class="tag">#LeoClub</span>
+      <span class="tag">#Volunteerism</span>
+      <span class="tag">#TogetherForNature</span>
+    </div>
+  </div>
+
+</body>
+</html>
